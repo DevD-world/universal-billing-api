@@ -1,11 +1,7 @@
 const mongoose = require('mongoose');
 
 const billSchema = new mongoose.Schema({
-    sourceProject: { 
-        type: String, 
-        required: true,
-        default: 'CaspianRow'
-    },
+    sourceProject: { type: String, required: true, default: 'CaspianRow' },
     customerName: { type: String },
     customerEmail: { type: String },
     items: [{
@@ -15,13 +11,11 @@ const billSchema = new mongoose.Schema({
         totalPrice: { type: Number, required: true }
     }],
     subTotal: { type: Number, required: true },
+    // NEW FIELD ADDED HERE:
+    discountAmount: { type: Number, default: 0 },
     taxAmount: { type: Number, default: 0 },
     finalTotal: { type: Number, required: true },
-    paymentStatus: { 
-        type: String, 
-        enum: ['Pending', 'Paid', 'Failed'], 
-        default: 'Pending' 
-    }
+    paymentStatus: { type: String, enum: ['Pending', 'Paid', 'Failed'], default: 'Pending' }
 }, { timestamps: true });
 
 module.exports = mongoose.model('Bill', billSchema);
